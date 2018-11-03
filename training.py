@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[512]:
+# In[2]:
 
 
 from sklearn.preprocessing import OneHotEncoder
@@ -14,14 +14,14 @@ import pandas as pd
 import data_generator
 
 
-# In[513]:
+# In[3]:
 
 
-df = pd.read_csv("training_data_30000.csv")
+df = pd.read_csv("student_data_30000.csv")
 df.head()
 
 
-# In[514]:
+# In[4]:
 
 
 features = df.drop("Grade", axis=1)
@@ -29,58 +29,58 @@ features = pd.get_dummies(features, drop_first=True)
 features.head()
 
 
-# In[515]:
+# In[5]:
 
 
 label = df["Grade"]
 label.head()
 
 
-# In[516]:
+# In[6]:
 
 
 X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=0.20)
 
 
-# In[517]:
+# In[7]:
 
 
 clf = tree.DecisionTreeClassifier()
 clf.fit(X_train, y_train)
 
 
-# In[518]:
+# In[8]:
 
 
 pred_label = clf.predict(X_test)
 
 
-# In[519]:
+# In[9]:
 
 
 accuracy_score(y_test, pred_label)
 
 
-# In[520]:
+# In[10]:
 
 
 clf = svm.SVC(gamma='scale')
 clf.fit(X_train, y_train)
 
 
-# In[521]:
+# In[11]:
 
 
 pred_label = clf.predict(X_test)
 
 
-# In[522]:
+# In[12]:
 
 
 accuracy_score(y_test, pred_label)
 
 
-# In[524]:
+# In[13]:
 
 
 # !jupyter nbconvert --to script training.ipynb
