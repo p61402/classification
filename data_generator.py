@@ -85,7 +85,7 @@ def rules():
     elif d["Avg sleep time"] <= 5 and d["Avg study time"] >= 8 and d["Family financial status"] in ["low", "avergae"]:
         d["Grade"] = data_range["Grade"][0]
     elif d["Avg study time"] >= 5 and d["In a relationship"] == "No":
-        d["Grade"] = random.choice(data_range["Grade"])
+        d["Grade"] = data_range["Grade"][1]
     elif d["TOEIC grade"] >= 800 and d["Avg sleep time"] <= 6:
         d["Grade"] = data_range["Grade"][1]
     elif d["Avg video game time"] >= 5:
