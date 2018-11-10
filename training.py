@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# 訓練 😉
+
+# 載入函式庫
 
 
 from sklearn.preprocessing import OneHotEncoder
@@ -14,74 +16,41 @@ import pandas as pd
 import data_generator
 
 
-# In[3]:
+# 讀入資料
+
+df = pd.read_csv("data/student_data_30000.csv")
+print(df.head())
 
 
-df = pd.read_csv("student_data_30000.csv")
-df.head()
-
-
-# In[4]:
-
+# 特徵
 
 features = df.drop("Grade", axis=1)
 features = pd.get_dummies(features, drop_first=True)
-features.head()
+print(features.head())
 
 
-# In[5]:
-
+# 類別
 
 label = df["Grade"]
-label.head()
+print(label.head())
 
 
-# In[6]:
-
+# 將資料分成訓練集(0.8)與測試集(0.2)
 
 X_train, X_test, y_train, y_test = train_test_split(features, label, test_size=0.20)
 
 
-# In[7]:
+# Decision Tree 🌲
 
-
-clf = tree.DecisionTreeClassifier()
+clf = tree.DecisionTreeClassifier(min_samples_split=2000, min_samples_leaf=1000, max_depth=8)
 clf.fit(X_train, y_train)
-
-
-# In[8]:
-
-
 pred_label = clf.predict(X_test)
+print(accuracy_score(y_test, pred_label))
 
 
-# In[9]:
-
-
-accuracy_score(y_test, pred_label)
-
-
-# In[10]:
-
+# Support Vector Machine 🗿
 
 clf = svm.SVC(gamma='scale')
 clf.fit(X_train, y_train)
-
-
-# In[11]:
-
-
 pred_label = clf.predict(X_test)
-
-
-# In[12]:
-
-
 accuracy_score(y_test, pred_label)
-
-
-# In[13]:
-
-
-# !jupyter nbconvert --to script training.ipynb
-
